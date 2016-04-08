@@ -1,0 +1,233 @@
+<html>
+	<head>
+		<title>The Weather Forecast</title>
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				background: #295bff;
+				color: white;
+				font-family: sans-serif;
+			}
+			
+			h1 {
+				text-align: center;
+				margin: 50px;
+			}
+			
+			#forcast {
+				width: 70%;
+				height: 200px;
+				float: left;
+				background-color: rgba(0, 0, 0, 0.05);
+				margin-left: 4%;
+				border-radius: 20px;
+			}
+			
+			#cities {
+				width: 20%;
+				float: right;
+				margin-right: 4%;
+			}
+			
+			#cities ul {
+				list-style: none;
+			}
+			
+			#cities li {
+				padding: .5em 0;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+				cursor: pointer;
+			}
+			
+			#cities li:hover {
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+			
+			#city-name {
+				text-align: center;
+				margin: .5em;
+			}
+			
+			#temps {
+				list-style: none;
+			}
+			
+			#temps li {
+				display: block;
+				width: 14.28%;
+				margin: 0;
+				padding: 0;
+				float: left;
+				text-align: center;
+			}
+			
+		</style>
+		
+		<script>
+			// Weather service API stuff (not used yet):
+			var apiKey = "70b22b3893ac5c19296cc47a036368ac";
+			var calabasasId = "5332593";
+			var phillyId = "4440906";
+			var jsonURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=7&appid=70b22b3893ac5c19296cc47a036368ac&units=imperial&id=";
+			
+			var weekday = new Array(7);
+			weekday[0]=  "Sun";
+			weekday[1] = "Mon";
+			weekday[2] = "Tue";
+			weekday[3] = "Wed";
+			weekday[4] = "Thu";
+			weekday[5] = "Fri";
+			weekday[6] = "Sat";
+			
+			function AJAX_JSON_Req( url )
+			{
+			    var AJAX_req = new XMLHttpRequest();
+			    AJAX_req.open( "GET", url, true );
+			    AJAX_req.setRequestHeader("Content-type", "application/json");
+			
+			    AJAX_req.onreadystatechange = function()
+			    {
+			        if( AJAX_req.readyState == 4 && AJAX_req.status == 200 )
+			        {
+			            var response = JSON.parse( AJAX_req.responseText );
+			            for(var i = 0; i < 7; i++){
+				            var d = new Date(response.list[i].dt * 1000);
+				            var day = weekday[d.getDay()];
+				            document.getElementById("day"+i).innerHTML = day;
+				            var lo = response.list[i].temp.min;
+				            var loInt = Math.round(lo);
+				            document.getElementById("day"+i+"Lo").innerHTML = loInt;
+				            var hi = response.list[i].temp.max;
+				            var hiInt = Math.round(hi);
+				            document.getElementById("day"+i+"Hi").innerHTML = hiInt;
+			            }
+			            
+			        }
+			    }
+			    AJAX_req.send();
+			}
+
+			AJAX_JSON_Req(jsonURL+phillyId);
+						
+			// Manually added data:
+			var calabasasTemps = {
+				sunLo: 47,
+				sunHi: 80,
+				monLo: 51,
+				monHi: 86,
+				tueLo: 59,
+				tueHi: 88,
+				wedLo: 61,
+				wedHi: 95,
+				thuLo: 54,
+				thuHi: 72,
+				friLo: 42,
+				friHi: 65,
+				satLo: 48,
+				satHi: 70
+				};
+				
+			var phillyTemps = {
+				sunLo: 37,
+				sunHi: 46,
+				monLo: 30,
+				monHi: 63,
+				tueLo: 28,
+				tueHi: 46,
+				wedLo: 48,
+				wedHi: 55,
+				thuLo: 41,
+				thuHi: 59,
+				friLo: 32,
+				friHi: 48,
+				satLo: 34,
+				satHi: 48
+				};
+			
+			function changeTo(c){
+				document.getElementById("city-name").innerHTML = c;
+				var temps;
+				if(c == "Philadelphia"){
+					temps = phillyTemps;
+				}else{
+					temps = calabasasTemps;
+				}
+				document.getElementById("sunLo").innerHTML = temps.sunLo;
+				document.getElementById("sunHi").innerHTML = temps.sunHi;
+				document.getElementById("monLo").innerHTML = temps.monLo;
+				document.getElementById("monHi").innerHTML = temps.monHi;
+				document.getElementById("tueLo").innerHTML = temps.tueLo;
+				document.getElementById("tueHi").innerHTML = temps.tueHi;
+				document.getElementById("wedLo").innerHTML = temps.wedLo;
+				document.getElementById("wedHi").innerHTML = temps.wedHi;
+				document.getElementById("thuLo").innerHTML = temps.thuLo;
+				document.getElementById("thuHi").innerHTML = temps.thuHi;
+				document.getElementById("friLo").innerHTML = temps.friLo;
+				document.getElementById("friHi").innerHTML = temps.friHi;
+				document.getElementById("satLo").innerHTML = temps.satLo;
+				document.getElementById("satHi").innerHTML = temps.satHi;
+
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+		<h1>The Weather Forecast</h1>
+		
+		<div id="forcast">
+			<h2 id="city-name">Calabasas</h2>
+			
+			<ul id="temps">
+				<li>
+					<h3 id="day0"></h3>
+					<p id="day0Lo">00</p>
+					<p id="day0Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day1"></h3>
+					<p id="day1Lo">00</p>
+					<p id="day1Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day2"></h3>
+					<p id="day2Lo">00</p>
+					<p id="day2Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day3"></h3>
+					<p id="day3Lo">00</p>
+					<p id="day3Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day4"></h3>
+					<p id="day4Lo">00</p>
+					<p id="day4Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day5"></h3>
+					<p id="day5Lo">00</p>
+					<p id="day5Hi">00</p>
+				</li>
+				<li>
+					<h3 id="day6"></h3>
+					<p id="day6Lo">00</p>
+					<p id="day6Hi">00</p>
+				</li>
+			</ul>
+		</div>
+		
+		<div id="cities">
+			<ul>
+				<li onclick="changeTo('Calabasas')">Calabasas</li>
+				<li onclick="changeTo('Philadelphia')">Philadelphia</li>
+			</ul>
+		</div>
+		
+	</body>
+</html>
