@@ -113,65 +113,15 @@
 			}
 
 			AJAX_JSON_Req(jsonURL+calabasasId);
-						
-			// Manually added data:
-			var calabasasTemps = {
-				sunLo: 47,
-				sunHi: 80,
-				monLo: 51,
-				monHi: 86,
-				tueLo: 59,
-				tueHi: 88,
-				wedLo: 61,
-				wedHi: 95,
-				thuLo: 54,
-				thuHi: 72,
-				friLo: 42,
-				friHi: 65,
-				satLo: 48,
-				satHi: 70
-				};
-				
-			var phillyTemps = {
-				sunLo: 37,
-				sunHi: 46,
-				monLo: 30,
-				monHi: 63,
-				tueLo: 28,
-				tueHi: 46,
-				wedLo: 48,
-				wedHi: 55,
-				thuLo: 41,
-				thuHi: 59,
-				friLo: 32,
-				friHi: 48,
-				satLo: 34,
-				satHi: 48
-				};
 			
 			function changeTo(c){
 				document.getElementById("city-name").innerHTML = c;
-				var temps;
+				var cityId;
 				if(c == "Philadelphia"){
-					temps = phillyTemps;
+					cityId = phillyId;
 				}else{
-					temps = calabasasTemps;
+					cityId = calabasasId;
 				}
-				document.getElementById("sunLo").innerHTML = temps.sunLo;
-				document.getElementById("sunHi").innerHTML = temps.sunHi;
-				document.getElementById("monLo").innerHTML = temps.monLo;
-				document.getElementById("monHi").innerHTML = temps.monHi;
-				document.getElementById("tueLo").innerHTML = temps.tueLo;
-				document.getElementById("tueHi").innerHTML = temps.tueHi;
-				document.getElementById("wedLo").innerHTML = temps.wedLo;
-				document.getElementById("wedHi").innerHTML = temps.wedHi;
-				document.getElementById("thuLo").innerHTML = temps.thuLo;
-				document.getElementById("thuHi").innerHTML = temps.thuHi;
-				document.getElementById("friLo").innerHTML = temps.friLo;
-				document.getElementById("friHi").innerHTML = temps.friHi;
-				document.getElementById("satLo").innerHTML = temps.satLo;
-				document.getElementById("satHi").innerHTML = temps.satHi;
-
 			}
 			
 		</script>
