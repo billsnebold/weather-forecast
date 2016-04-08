@@ -73,7 +73,7 @@
 			var apiKey = "70b22b3893ac5c19296cc47a036368ac";
 			var calabasasId = "5332593";
 			var phillyId = "4440906";
-			var jsonURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=7&appid=70b22b3893ac5c19296cc47a036368ac&units=imperial&id=";
+			var jsonURL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=7&appid=70b22b3893ac5c19296cc47a036368ac&id=";
 			
 			var weekday = new Array(7);
 			weekday[0]=  "Sun";
@@ -100,10 +100,12 @@
 				            var day = weekday[d.getDay()];
 				            document.getElementById("day"+i).innerHTML = day;
 				            var lo = response.list[i].temp.min;
-				            var loInt = Math.round(lo);
+				            var loF = 9/5(lo - 273) + 32;
+				            var loInt = Math.round(loF);
 				            document.getElementById("day"+i+"Lo").innerHTML = loInt;
 				            var hi = response.list[i].temp.max;
-				            var hiInt = Math.round(hi);
+				            var hiF = 9/5(hi - 273) + 32;
+				            var hiInt = Math.round(hiF);
 				            document.getElementById("day"+i+"Hi").innerHTML = hiInt;
 			            }
 			            
