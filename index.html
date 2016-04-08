@@ -100,11 +100,11 @@
 				            var day = weekday[d.getDay()];
 				            document.getElementById("day"+i).innerHTML = day;
 				            var lo = response.list[i].temp.min;
-				            var loF = 9/5(lo - 273) + 32;
+				            var loF = lo * 9/5 - 459.67;
 				            var loInt = Math.round(loF);
 				            document.getElementById("day"+i+"Lo").innerHTML = loInt;
 				            var hi = response.list[i].temp.max;
-				            var hiF = 9/5(hi - 273) + 32;
+				            var hiF = hi * 9/5 - 459.67;
 				            var hiInt = Math.round(hiF);
 				            document.getElementById("day"+i+"Hi").innerHTML = hiInt;
 			            }
